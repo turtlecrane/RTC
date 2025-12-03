@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,14 +12,15 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Move")]
     public float moveSpeed;
     public float acceleration; // 부드럽게 속도 맞출 때 사용
-    public GameObject moveDustParticle;
+    public bool canMove = true;
 
     [Header("Jump")]
     public float jumpForce = 6f;
-    //public float jumpHeight = 1.3f; // 높이 기반 계산 사용시 (선택)
+    private enum AirState { Grounded, Rising, Falling }
     public LayerMask groundMask;
     public float groundCheckDistance = 0.1f;
-    [HideInInspector] public bool isLand;
+    private AirState airState = AirState.Grounded;
+    private float lastGroundedTime;
     
     private Rigidbody rb;
     private PlayerAssetsInputs _input;
@@ -68,6 +70,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         HandleMove();
         HandleJump();
+        UpdateAirState();
     }
 
     private void LateUpdate()
@@ -77,7 +80,10 @@ public class PlayerMovementController : MonoBehaviour
 
     private void HandleMove()
     {
-        if(isLand) return;
+        bool isMoving = _input.move.sqrMagnitude > 0.01f;
+        anim.SetBool("Walk", isMoving);
+        
+        if(!canMove) return;
         
         // 카메라 기준 이동 (카메라가 null이면 로컬 축 사용)
         //Debug.Log(Camera.main.gameObject.name);
@@ -116,9 +122,6 @@ public class PlayerMovementController : MonoBehaviour
                 10f * Time.fixedDeltaTime   // 회전 속도 수치 (10f)
             );
         }
-        
-        bool isMoving = _input.move.sqrMagnitude > 0.01f;
-        anim.SetBool("Walk", isMoving);
     }
 
     private void HandleJump()
@@ -131,6 +134,69 @@ public class PlayerMovementController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
         _input.wantJump = false;
+    }
+    
+    void UpdateAirState()
+    {
+        bool grounded = IsGrounded();
+        float vy = rb.linearVelocity.y;
+
+        switch (airState)
+        {
+            case AirState.Grounded:
+                // 착지한 지 0.2초가 안 지났으면 상태 전환 금지
+                if (Time.time < lastGroundedTime + 0.2f) return;
+
+                if (!grounded)
+                {
+                    if (vy > 0.1f) airState = AirState.Rising;
+                    else if (vy < -0.1f)
+                    {
+                        airState = AirState.Falling;
+                        anim.SetTrigger("Falling");
+                    }
+                }
+                break;
+
+            case AirState.Rising:
+                if (grounded)
+                {
+                    EnterGroundedState(); break;
+                }
+                if (vy < -0.1f)
+                {
+                    airState = AirState.Falling;
+                    anim.SetTrigger("Falling");
+                }
+                break;
+
+            case AirState.Falling:
+                if (grounded)
+                {
+                    EnterGroundedState();
+                }
+                break;
+        }
+    }
+    
+    private bool IsGrounded()
+    {
+        CapsuleCollider col = GetComponent<CapsuleCollider>();
+
+        Vector3 start = transform.position + Vector3.up * (col.radius);
+        Vector3 end = transform.position + Vector3.up * (col.height - col.radius);
+
+        float distance = groundCheckDistance;
+
+        return Physics.CapsuleCast(
+            start,
+            end,
+            col.radius * 0.95f,
+            Vector3.down,
+            distance,
+            groundMask,
+            QueryTriggerInteraction.Ignore
+        );
     }
     
     private void CameraRotation()
@@ -152,7 +218,8 @@ public class PlayerMovementController : MonoBehaviour
         cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + cameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
     }
-
+    
+    //[Animation에서 호출]-----------------
     public void PlayMoveDustParticle()
     {
         if (ParticlePool.Instance == null) return;
@@ -170,13 +237,19 @@ public class PlayerMovementController : MonoBehaviour
             ps.Play(true);
         }
     }
-
-    bool IsGrounded()
+    
+    // [헬퍼 함수] 착지 로직을 공통으로 관리
+    private void EnterGroundedState()
     {
-        // 캡슐 하단에서 레이캐스트로 바닥 감지
-        Vector3 origin = transform.position + Vector3.up * 0.1f;
-        float dist = groundCheckDistance + 0.1f;
-        return Physics.Raycast(origin, Vector3.down, dist, groundMask, QueryTriggerInteraction.Ignore);
+        airState = AirState.Grounded;
+        lastGroundedTime = Time.time; // 착지 시간 기록
+
+        // 땅에 닿는 순간 튀어 오르는 반동(Y속도)을 강제로 죽임
+        Vector3 vel = rb.linearVelocity;
+        vel.y = 0f;
+        rb.linearVelocity = vel;
+        
+        anim.SetTrigger("Landing");
     }
     
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

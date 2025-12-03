@@ -8,11 +8,13 @@ public class PlayerInteractSystem : MonoBehaviour
 {
     public bool canInteract = false;
     private PlayerAssetsInputs _input;
+    private Animator anim;
     private NpcDialogueSystem npcScript;
     
     private void Start()
     {
         _input = GetComponent<PlayerAssetsInputs>();
+        anim = GetComponent<Animator>();
     }
     
     public void OnInteract(InputValue value)
@@ -27,6 +29,7 @@ public class PlayerInteractSystem : MonoBehaviour
         {
             Debug.Log("상호작용 버튼이 눌림");
             npcScript.Talking();
+            anim.SetTrigger("Talk");
         }
     }
 

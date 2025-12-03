@@ -76,7 +76,7 @@ Rigidbody:
   m_GameObject: {fileID: 100252003253058630}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 2.5
+  m_Drag: 1.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -113,10 +113,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45687577
-  m_Height: 1.4978818
+  m_Radius: 0.25416565
+  m_Height: 1.5060062
   m_Direction: 1
-  m_Center: {x: 0.006132096, y: 0.7462178, z: 0.022075623}
+  m_Center: {x: 0.006132096, y: 0.74215555, z: 0.020507812}
 --- !u!114 &3383819214244961456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,14 +159,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d941eeb073b4258439abd307db33f8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
-  acceleration: 100
+  moveSpeed: 1000
+  acceleration: 55
+  canMove: 1
   jumpForce: 4.5
+  falling: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   groundCheckDistance: 0.1
-  isLand: 0
+  groundedRequiredTime: 0.05
   cinemachineCameraTarget: {fileID: 4044396601021832752}
   topClamp: 70
   bottomClamp: -30
@@ -184,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a24da0f2a733a4d9c94f9ec9eb1f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
 --- !u!114 &4764672486332371235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +204,6 @@ MonoBehaviour:
   cursorInputForLook: 1
   move: {x: 0, y: 0}
   wantJump: 0
-  wantInteract: 0
 --- !u!1 &169385979608155704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8775391950259749873}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: napcat_TrackingPoint
   m_TagString: CinemachineTarget
   m_Icon: {fileID: 0}
