@@ -1,0 +1,64 @@
+using System;
+using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
+public class PlayerInteractSystem : MonoBehaviour
+{
+    public bool canInteract = false;
+    private PlayerAssetsInputs _input;
+    private NpcDialogueSystem npcScript;
+    
+    private void Start()
+    {
+        _input = GetComponent<PlayerAssetsInputs>();
+    }
+    
+    public void OnInteract(InputValue value)
+    {
+        if (!canInteract)
+        {
+            Debug.Log("상호작용할 대상이 없음");
+            return;
+        }
+        
+        if (value.isPressed)
+        {
+            Debug.Log("상호작용 버튼이 눌림");
+            npcScript.Talking();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NPC"))
+        {
+            if (other.GetComponent<NpcDialogueSystem>() != null)
+            {
+                npcScript = other.GetComponent<NpcDialogueSystem>();
+                if (npcScript.wantTalk)
+                {
+                    canInteract = true;
+                }
+                else
+                {
+                    canInteract = false;
+                }
+            }
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("NPC"))
+        {
+            canInteract = false;
+            if (other.GetComponent<NpcDialogueSystem>() != null && npcScript.inTalking)
+            {
+                npcScript.playerLeave = true;
+                //npcScript.StopTalking();
+            }
+        }
+    }
+}

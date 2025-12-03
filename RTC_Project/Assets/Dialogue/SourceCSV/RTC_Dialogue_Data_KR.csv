@@ -1,0 +1,16 @@
+speaker,id,condition,text,duration,next_id,note
+NPC01,1,nomal,나.. 너에게 할말이 있어,3,2,
+NPC01,2,nomal,이거.. 지금 테스트 하는거야.. <br> 알아?,4,3,
+NPC01,3,nomal,csv라는거로...<br>말할수있게..해준대..,4,4,
+NPC01,4,nomal,잘 작동됐으면... 좋겠네....,3,,talkend
+NPC01,5,leave,야!!!!!!<br>어디가!!!!<br>우씨~~,2,,
+NPC03,1,nomal,내가 한가지 팁 알려줄까?,3,2,
+NPC03,2,nomal,대화 도중에 자리를 피하는건<br>상대에 대한 무례야,6,3,
+NPC03,3,nomal,말하는 사람이 화가나서,4,4,
+NPC03,4,nomal,더이상 너와 대화하고 싶지 않아 할지도 몰라,5,5,
+NPC03,5,nomal,그러니 너는 예의 있게 행동해,3,,talkend
+NPC03,6,leave,"하아, 그래.",5,,talkend
+NPC04,1,nomal,녀석을 보는거야? 예리한데!,4,,
+NPC04,2,nomal,저 녀석도 동료야. 나처럼 동쪽에서 왔지.,4,,
+NPC04,3,nomal, 항상 조용하지만 실력은 뛰어나.,4,,
+NPC04,4,nomal,나중에 보면 알아. 하하하하.,3,,

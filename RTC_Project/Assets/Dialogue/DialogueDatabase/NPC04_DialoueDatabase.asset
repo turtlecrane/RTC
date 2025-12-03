@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db2e5a0c7dfe834f982f99f38ef2ac5, type: 3}
+  m_Name: NPC04_DialoueDatabase
+  m_EditorClassIdentifier: 
+  dialogueAssets:
+  - {fileID: 11400000, guid: ee0dcac2d3f27c54d9df58b3f7f31dc4, type: 2}
+  - {fileID: 11400000, guid: 2b9d063ee67485a4d8fd79ec43b1cce2, type: 2}
+  - {fileID: 11400000, guid: 6880ad540872b8b4cab2315c81b12f3b, type: 2}
+  - {fileID: 11400000, guid: 9e1d1aa34fa382142881e878293f8524, type: 2}
