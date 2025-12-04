@@ -8021,7 +8021,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5636065
+        value: 0.65
         inSlope: -0.010261059
         outSlope: -0.010261059
         tangentMode: 0
@@ -8029,26 +8029,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.56624854
-        inSlope: 0.009638073
-        outSlope: 0.009638073
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.8333334
-        value: 0.5627679
-        inSlope: -0.04126954
-        outSlope: -0.04126954
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1.6666667
-        value: 0.5619976
+        value: 0.65
         inSlope: -0.043742098
         outSlope: -0.043742098
         tangentMode: 0
@@ -9125,7 +9107,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5007827
+        value: 0.65
         inSlope: -0.021683693
         outSlope: -0.021683693
         tangentMode: 0
@@ -9133,26 +9115,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
-        value: 0.5047578
-        inSlope: 0.0033366692
-        outSlope: 0.0033366692
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.3333334
-        value: 0.5014278
-        inSlope: 0.01774265
-        outSlope: 0.01774265
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1.6666667
-        value: 0.50017834
+        value: 0.65
         inSlope: -0.017977204
         outSlope: -0.017977204
         tangentMode: 0
@@ -24290,7 +24254,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5636065
+        value: 0.65
         inSlope: -0.010261059
         outSlope: -0.010261059
         tangentMode: 0
@@ -24298,26 +24262,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.56624854
-        inSlope: 0.009638073
-        outSlope: 0.009638073
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.8333334
-        value: 0.5627679
-        inSlope: -0.04126954
-        outSlope: -0.04126954
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1.6666667
-        value: 0.5619976
+        value: 0.65
         inSlope: -0.043742098
         outSlope: -0.043742098
         tangentMode: 0
@@ -25394,7 +25340,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5007827
+        value: 0.65
         inSlope: -0.021683693
         outSlope: -0.021683693
         tangentMode: 0
@@ -25402,26 +25348,8 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
-        value: 0.5047578
-        inSlope: 0.0033366692
-        outSlope: 0.0033366692
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1.3333334
-        value: 0.5014278
-        inSlope: 0.01774265
-        outSlope: 0.01774265
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
         time: 1.6666667
-        value: 0.50017834
+        value: 0.65
         inSlope: -0.017977204
         outSlope: -0.017977204
         tangentMode: 0

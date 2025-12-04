@@ -91,7 +91,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!136 &2916369480342488129
@@ -159,16 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d941eeb073b4258439abd307db33f8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1000
-  acceleration: 55
+  moveSpeed: 4
   canMove: 1
-  jumpForce: 4.5
-  falling: 0
+  runMoveSpeed: 6
+  jumpForce: 6
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  groundCheckDistance: 0.1
-  groundedRequiredTime: 0.05
   cinemachineCameraTarget: {fileID: 4044396601021832752}
   topClamp: 70
   bottomClamp: -30

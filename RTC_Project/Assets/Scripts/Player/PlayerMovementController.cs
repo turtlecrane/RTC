@@ -13,12 +13,14 @@ public class PlayerMovementController : MonoBehaviour
     public float moveSpeed;
     public float acceleration; // 부드럽게 속도 맞출 때 사용
     public bool canMove = true;
+    public float runMoveSpeed = 8f;            // 달리기 속도 (walkSpeed(moveSpeed)보다 크게 설정)
+    public float runInputSmoothing = 10f;      // 0이면 즉시 반영, 클수록 부드럽게 변화 (선택값)
+    private float currentRunInput = 0f;        // 스무딩용 내부값
 
     [Header("Jump")]
     public float jumpForce = 6f;
     private enum AirState { Grounded, Rising, Falling }
     public LayerMask groundMask;
-    public float groundCheckDistance = 0.1f;
     private AirState airState = AirState.Grounded;
     private float lastGroundedTime;
     
@@ -82,44 +84,65 @@ public class PlayerMovementController : MonoBehaviour
     {
         bool isMoving = _input.move.sqrMagnitude > 0.01f;
         anim.SetBool("Walk", isMoving);
+
+        if (!canMove) return;
+
+        // --- 1) Run input 읽기
+        float runInput = 0f;
+        if (_playerInput != null && _playerInput.actions != null && _playerInput.actions.FindAction("Run") != null)
+        {
+            runInput = _playerInput.actions["Run"].ReadValue<float>(); // 키보드: 0/1, 패드: 0~1
+        }
         
-        if(!canMove) return;
-        
-        // 카메라 기준 이동 (카메라가 null이면 로컬 축 사용)
-        //Debug.Log(Camera.main.gameObject.name);
+        // 선택: run input smoothing (부드럽게 바뀌길 원하면 값 > 0)
+        if (runInputSmoothing > 0f)
+            currentRunInput = Mathf.MoveTowards(currentRunInput, runInput, runInputSmoothing * Time.fixedDeltaTime);
+        else
+            currentRunInput = runInput;
+
+        // 애니메이터 파라미터 반영
+        anim.SetFloat("runSpeed", currentRunInput);
+
+        // --- 2) 최종 속도 계산 (즉시 반영)
+        float speed = Mathf.Lerp(moveSpeed, runMoveSpeed, currentRunInput);
+
+        // --- 3) 카메라 기준 이동 벡터 계산
         Vector3 camForward = Camera.main ? Camera.main.transform.forward : Vector3.forward;
         Vector3 camRight = Camera.main ? Camera.main.transform.right : Vector3.right;
 
-        // 수직 성분 제거해서 평면 이동으로 만듦
+        // 평면화
         camForward.y = 0f;
         camRight.y = 0f;
         camForward.Normalize();
         camRight.Normalize();
 
-        Vector3 desired = (camRight * _input.move.x + camForward * _input.move.y) * moveSpeed;
+        Vector3 desired = (camRight * _input.move.x + camForward * _input.move.y) * speed;
 
-        // 현재 속도에서 수평 성분만 분리
+        // --- 4) LERP 기반 가속 (MoveTowards 제거!)
         Vector3 currentVel = rb.linearVelocity;
         Vector3 currentHoriz = new Vector3(currentVel.x, 0f, currentVel.z);
 
-        // 부드럽게 속도 맞추기
-        Vector3 newHoriz = Vector3.MoveTowards(currentHoriz, desired, acceleration * Time.fixedDeltaTime);
+        // acceleration이 클수록 즉시 변화, 작을수록 부드러움
+        Vector3 newHoriz = Vector3.Lerp(
+            currentHoriz,
+            desired,
+            acceleration * Time.fixedDeltaTime
+        );
 
-        // 최종 속도: 새로운 수평 + 기존 수직
+        // --- 5) Rigidbody 속도 적용 (수직속도 유지)
         rb.linearVelocity = new Vector3(newHoriz.x, currentVel.y, newHoriz.z);
-        
-        //회전
+
+        // --- 6) 이동방향 바라보기
         Vector3 lookDir = new Vector3(desired.x, 0f, desired.z);
 
-        if (lookDir.sqrMagnitude > 0.001f) // 입력 있을 때만
+        if (lookDir.sqrMagnitude > 0.001f)
         {
             Quaternion targetRot = Quaternion.LookRotation(lookDir, Vector3.up);
 
-            // 자연스러운 회전 slerp
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 targetRot,
-                10f * Time.fixedDeltaTime   // 회전 속도 수치 (10f)
+                10f * Time.fixedDeltaTime
             );
         }
     }
@@ -186,7 +209,7 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 start = transform.position + Vector3.up * (col.radius);
         Vector3 end = transform.position + Vector3.up * (col.height - col.radius);
 
-        float distance = groundCheckDistance;
+        float distance = 0.1f;
 
         return Physics.CapsuleCast(
             start,
