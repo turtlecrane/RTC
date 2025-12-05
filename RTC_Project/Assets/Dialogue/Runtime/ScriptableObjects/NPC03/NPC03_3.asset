@@ -16,6 +16,6 @@ MonoBehaviour:
   id: 3
   condition: nomal
   text: "\uB9D0\uD558\uB294 \uC0AC\uB78C\uC774 \uD654\uAC00\uB098\uC11C"
-  duration: 4
+  duration: 1
   nextId: 4
   note: 

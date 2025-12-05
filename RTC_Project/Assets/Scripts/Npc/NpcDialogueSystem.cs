@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPEffects.Components;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class NpcDialogueSystem : MonoBehaviour
     [Header("UI / Bubble")]
     public TextBubbleSystem textBubble; // 사용중인 텍스트 버블 컴포넌트
     private TMP_Text context;            // textBubble.context 를 미리 연결해도 됨
+    private TMPAnimator tmpAnimator;
 
     [Header("State")]
     public string speakerName;      // 이 NPC의 speaker 이름 (CSV의 speaker 컬럼)
@@ -26,6 +28,7 @@ public class NpcDialogueSystem : MonoBehaviour
     {
         StartCoroutine(TalkPossibleDisplay());
         context = textBubble.context;
+        tmpAnimator = textBubble.tmpAnimator;
         BuildMapFromDatabase();
     }
 
@@ -82,8 +85,9 @@ public class NpcDialogueSystem : MonoBehaviour
             }
 
             // 실제 텍스트 세팅 (Localization이 있다면 LocalizationManager로 바꿔 호출)
-            context.text = current.text;
-
+            //context.text = current.text;
+            tmpAnimator.SetText("<!show>"+current.text);
+            
             //AudioManager.Play(current.voiceKey);
             //Animator.SetTrigger(current.emotion);
 

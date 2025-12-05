@@ -1,33 +1,28 @@
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.UI; // LayoutRebuilder
+using UnityEngine.UI;
 using System;
+using TMPEffects.Components;
 
 public class TextBubbleSystem : MonoBehaviour
 {
-    public bool testHide;
-    
     [Header("References")]
     public SpriteRenderer bubbleSr;        // Sliced SpriteRenderer (size 사용)
     public SpriteRenderer taleSr; 
     public TMP_Text context;         // TextMeshPro 텍스트 (RectTransform)
+    [HideInInspector]public TMPAnimator tmpAnimator;
+    private TMPWriter tmpWriter;
 
     [Header("Resize")]
     public Vector2 padding = new Vector2(0.35f, 0.35f); 
     private float resizeDuration = 0.18f;
-    private Ease resizeEase = Ease.OutQuad;
 
-    //[Header("Show Animation")]
+    //[Header("Animation")]
     private float showDuration = 0.25f;
-    private float showStartScale = 0.55f;
     private float showStartAlpha = 0.4f;
-    private Ease showEase = Ease.OutBack;
-
-    //[Header("Hide Animation")]
     private float hideDuration = 0.18f;
     private float hideEndAlpha = 0f;
-    private Ease hideEase = Ease.InQuad;
 
     [Header("Misc")]
     public Vector2 minSize = new Vector2(0.66f, 0.66f); // 최소 사이즈(유닛)
@@ -47,7 +42,6 @@ public class TextBubbleSystem : MonoBehaviour
     private Vector3 bubbleLocalPos;
     private Vector3 taleOriginalScale;
     private Vector2 talelastSize = Vector2.zero;
-
     
     private bool isHiding = false;
     
@@ -64,17 +58,14 @@ public class TextBubbleSystem : MonoBehaviour
         bubbleColor = bubbleSr.color;
         taleColor = taleSr.color;
         textColor = context.color;
+        tmpAnimator = context.GetComponent<TMPAnimator>();
+        tmpWriter = context.GetComponent<TMPWriter>();
         cam = Camera.main;
     }
 
     private void OnEnable()
     {
         PlayShowAnimation();
-    }
-
-    private void Update()
-    {
-        if(testHide) Hide();
     }
 
     private void LateUpdate()
@@ -85,7 +76,6 @@ public class TextBubbleSystem : MonoBehaviour
 
     private void OnDisable()
     {
-        testHide = false;
         // 비활성화될 때 트윈 정리
         KillAllTweens();
     }
@@ -98,7 +88,9 @@ public class TextBubbleSystem : MonoBehaviour
         PlayHideAnimation(() =>
         {
             // 애니메이션 끝나면 완전 비활성화
+            tmpAnimator.enabled = false;
             isHiding = false;
+            tmpWriter.ResetWriter();
             gameObject.SetActive(false);
         });
     }
@@ -124,7 +116,7 @@ public class TextBubbleSystem : MonoBehaviour
 
         // SpriteRenderer.size 타입은 Vector2
         sizeTween = DOTween.To(() => bubbleSr.size, x => bubbleSr.size = x, targetPixelSize, resizeDuration)
-            .SetEase(resizeEase);
+            .SetEase(Ease.OutQuad);
         
         // 텍스트 크기 변화 감지
         if (Vector2.Distance(talelastSize, targetPixelSize) > 0.01f)
@@ -134,7 +126,6 @@ public class TextBubbleSystem : MonoBehaviour
         }
 
         talelastSize = targetPixelSize;
-
     }
 
     private void PlayTailPopAnimation()
@@ -182,11 +173,14 @@ public class TextBubbleSystem : MonoBehaviour
     //[Aniamtion]--------------------------------------
     private void PlayShowAnimation()
     {
+        tmpAnimator.enabled = true;
+        tmpWriter.StartWriter();
+        
         KillAllTweens();
         isHiding = false;
 
         // 초기 scale
-        bubbleSr.transform.localScale = Vector3.one * showStartScale;
+        bubbleSr.transform.localScale = Vector3.one * 0.55f;
 
         // 알파 초기화
         SetAlpha(bubbleSr, showStartAlpha);
@@ -194,7 +188,7 @@ public class TextBubbleSystem : MonoBehaviour
         SetTextAlpha(showStartAlpha);
 
         showTween = DOTween.Sequence()
-            .Join(bubbleSr.transform.DOScale(1f, showDuration).SetEase(showEase))
+            .Join(bubbleSr.transform.DOScale(1f, showDuration).SetEase(Ease.OutBack))
             .Join(bubbleSr.DOFade(bubbleColor.a, showDuration))
             .Join(context.DOFade(textColor.a, showDuration))
             .Join(taleSr.DOFade(taleColor.a, showDuration).SetDelay(0.085f));
@@ -207,10 +201,10 @@ public class TextBubbleSystem : MonoBehaviour
         if (showTween != null && showTween.IsActive()) showTween.Kill();
 
         hideTween = DOTween.Sequence()
-            .Join(bubbleSr.transform.DOScale(0f, hideDuration).SetEase(hideEase))
-            .Join(bubbleSr.DOFade(hideEndAlpha, hideDuration).SetEase(hideEase))
-            .Join(taleSr.DOFade(hideEndAlpha, hideDuration-0.08f).SetEase(hideEase))
-            .Join(context.DOFade(hideEndAlpha, hideDuration).SetEase(hideEase))
+            .Join(bubbleSr.transform.DOScale(0f, hideDuration).SetEase(Ease.InQuad))
+            .Join(bubbleSr.DOFade(hideEndAlpha, hideDuration).SetEase(Ease.InQuad))
+            .Join(taleSr.DOFade(hideEndAlpha, hideDuration-0.08f).SetEase(Ease.InQuad))
+            .Join(context.DOFade(hideEndAlpha, hideDuration).SetEase(Ease.InQuad))
             .OnComplete(() =>
             {
                 bubbleSr.transform.localScale = Vector3.one;
