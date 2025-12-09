@@ -15,7 +15,7 @@ MonoBehaviour:
   speaker: NPC01
   id: 3
   condition: nomal
-  text: "csv\uB77C\uB294\uAC70\uB85C...<br>\uB9D0\uD560\uC218\uC788\uAC8C..\uD574\uC900\uB300.."
-  duration: 4
+  text: "csv\uB77C\uB294\uAC70\uB85C...<!wait=1><br>\uB9D0\uD560\uC218\uC788\uAC8C..<!wait=0.75><!delay=0.5>\uD574\uC900\uB300.."
+  duration: 9
   nextId: 4
   note: 

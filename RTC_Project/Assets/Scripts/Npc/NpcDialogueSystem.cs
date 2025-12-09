@@ -86,7 +86,7 @@ public class NpcDialogueSystem : MonoBehaviour
 
             // 실제 텍스트 세팅 (Localization이 있다면 LocalizationManager로 바꿔 호출)
             //context.text = current.text;
-            tmpAnimator.SetText("<!show>"+current.text);
+            tmpAnimator.SetText("<!show></!><!delay=0.075>"+current.text);
             
             //AudioManager.Play(current.voiceKey);
             //Animator.SetTrigger(current.emotion);

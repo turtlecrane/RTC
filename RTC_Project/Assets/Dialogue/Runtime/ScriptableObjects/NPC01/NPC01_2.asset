@@ -16,7 +16,7 @@ MonoBehaviour:
   id: 2
   condition: nomal
   text: "\uC774\uAC70.. \uC9C0\uAE08 \uD14C\uC2A4\uD2B8 \uD558\uB294\uAC70\uC57C..
-    <br> \uC54C\uC544?"
+    <br><!wait=1> \uC54C\uC544?"
   duration: 4
   nextId: 3
   note: 
