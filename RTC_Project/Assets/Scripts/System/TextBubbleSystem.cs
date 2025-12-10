@@ -80,7 +80,7 @@ public class TextBubbleSystem : MonoBehaviour
         KillAllTweens();
     }
 
-    // 외부에서 말풍선 닫을 때 안전하게 호출할 것
+    //말풍선 닫기 -> 외부 호출
     public void Hide()
     {
         if (isHiding) return;
@@ -99,35 +99,35 @@ public class TextBubbleSystem : MonoBehaviour
     {
         if (textRect == null) return;
         
-        // 1) 레이아웃을 강제 갱신해서 ContentSizeFitter 등이 반영되게 함
+        //레이아웃을 강제 갱신 -> ContentSizeFitter 반영
         LayoutRebuilder.ForceRebuildLayoutImmediate(textRect);
         
-        // 2) 텍스트 크기(px) -> 목표 sr.size(유닛) 계산
+        //텍스트 크기 목표 sr.size계산
         Vector2 targetPixelSize = Vector2.zero;
         targetPixelSize = new Vector2(textRect.rect.width + padding.x, textRect.rect.height + padding.y);
         bubbleRect.sizeDelta = new Vector2(textRect.rect.width + padding.x, textRect.rect.height + padding.y);
 
-        // 최소값 적용
+        // 최소 크기 값
         targetPixelSize.x = Mathf.Max(minSize.x, targetPixelSize.x);
         targetPixelSize.y = Mathf.Max(minSize.y, targetPixelSize.y);
 
-        // 3) 부드럽게 Tween으로 변경 (기존 트윈이 있으면 갱신/대체)
+        // 부드럽게 Tween으로 변경
         if (sizeTween != null && sizeTween.IsActive()) sizeTween.Kill();
-
-        // SpriteRenderer.size 타입은 Vector2
         sizeTween = DOTween.To(() => bubbleSr.size, x => bubbleSr.size = x, targetPixelSize, resizeDuration)
             .SetEase(Ease.OutQuad);
         
         // 텍스트 크기 변화 감지
         if (Vector2.Distance(talelastSize, targetPixelSize) > 0.01f)
         {
-            //Debug.Log("꼬리튕김");
             PlayTailPopAnimation();
         }
 
         talelastSize = targetPixelSize;
     }
 
+    /// <summary>
+    /// 텍스트가 변화할때 꼬리 튕김
+    /// </summary>
     private void PlayTailPopAnimation()
     {
         if (taleOriginalScale == Vector3.zero)
@@ -147,7 +147,10 @@ public class TextBubbleSystem : MonoBehaviour
             });
     }
 
-    //[TextLook]--------------------------------------
+    /// <summary>
+    /// 말풍선 내용 -> 항상 카메라 바라보기 |
+    /// 말풍선 꼬리 -> 항상 화자를 가리키기
+    /// </summary>
     private void TextLookAction()
     {
         if (!cam || !npc) return;

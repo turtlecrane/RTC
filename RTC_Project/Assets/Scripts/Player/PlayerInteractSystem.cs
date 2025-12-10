@@ -17,6 +17,7 @@ public class PlayerInteractSystem : MonoBehaviour
         anim = GetComponent<Animator>();
     }
     
+    //플레이어 인풋 매니저에서 호출
     public void OnInteract(InputValue value)
     {
         if (!canInteract)

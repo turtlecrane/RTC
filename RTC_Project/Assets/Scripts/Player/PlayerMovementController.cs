@@ -32,15 +32,14 @@ public class PlayerMovementController : MonoBehaviour
     //-----Cinemachine-----
     [Header("Cinemachine")]
     public GameObject cinemachineCameraTarget;
-    public float topClamp = 70.0f; //상한 제어
-    public float bottomClamp = -30.0f; //하한 제어
-    public float cameraAngleOverride = 0.0f; //추가 각도
-    public bool lockCameraPosition = false;
+    private float topClamp = 70.0f; //상한 제어
+    private float bottomClamp = -30.0f; //하한 제어
+    private float cameraAngleOverride = 0.0f; //추가 각도
+    private bool lockCameraPosition = false;
     
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
-    
     private bool IsCurrentDeviceMouse
     {
         get
@@ -80,6 +79,7 @@ public class PlayerMovementController : MonoBehaviour
         CameraRotation();
     }
 
+    #region Movement
     private void HandleMove()
     {
         bool isMoving = _input.move.sqrMagnitude > 0.01f;
@@ -158,49 +158,7 @@ public class PlayerMovementController : MonoBehaviour
         }
         _input.wantJump = false;
     }
-    
-    void UpdateAirState()
-    {
-        bool grounded = IsGrounded();
-        float vy = rb.linearVelocity.y;
-
-        switch (airState)
-        {
-            case AirState.Grounded:
-                // 착지한 지 0.2초가 안 지났으면 상태 전환 금지
-                if (Time.time < lastGroundedTime + 0.2f) return;
-
-                if (!grounded)
-                {
-                    if (vy > 0.1f) airState = AirState.Rising;
-                    else if (vy < -0.1f)
-                    {
-                        airState = AirState.Falling;
-                        anim.SetTrigger("Falling");
-                    }
-                }
-                break;
-
-            case AirState.Rising:
-                if (grounded)
-                {
-                    EnterGroundedState(); break;
-                }
-                if (vy < -0.1f)
-                {
-                    airState = AirState.Falling;
-                    anim.SetTrigger("Falling");
-                }
-                break;
-
-            case AirState.Falling:
-                if (grounded)
-                {
-                    EnterGroundedState();
-                }
-                break;
-        }
-    }
+    #endregion
     
     private bool IsGrounded()
     {
@@ -243,7 +201,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     
     //[Animation에서 호출]-----------------
-    public void PlayMoveDustParticle()
+    public void PlayMoveDustParticle() //Landing, Running, Walk의 EventTrigger에서 호출
     {
         if (ParticlePool.Instance == null) return;
 
@@ -260,19 +218,63 @@ public class PlayerMovementController : MonoBehaviour
             ps.Play(true);
         }
     }
-    
+
+    #region Helper Function
     // [헬퍼 함수] 착지 로직을 공통으로 관리
     private void EnterGroundedState()
     {
         airState = AirState.Grounded;
         lastGroundedTime = Time.time; // 착지 시간 기록
 
-        // 땅에 닿는 순간 튀어 오르는 반동(Y속도)을 강제로 죽임
+        // 땅에 닿는 순간 튀어 오르는 반동(Y속도)을 강제로 죽임 << 하드코딩
         Vector3 vel = rb.linearVelocity;
         vel.y = 0f;
         rb.linearVelocity = vel;
         
         anim.SetTrigger("Landing");
+    }
+    
+    private void UpdateAirState()
+    {
+        bool grounded = IsGrounded();
+        float vy = rb.linearVelocity.y;
+
+        switch (airState)
+        {
+            case AirState.Grounded:
+                // 착지한 지 0.2초가 안 지났으면 상태 전환 금지
+                if (Time.time < lastGroundedTime + 0.2f) return;
+
+                if (!grounded)
+                {
+                    if (vy > 0.1f) airState = AirState.Rising;
+                    else if (vy < -0.1f)
+                    {
+                        airState = AirState.Falling;
+                        anim.SetTrigger("Falling");
+                    }
+                }
+                break;
+
+            case AirState.Rising:
+                if (grounded)
+                {
+                    EnterGroundedState(); break;
+                }
+                if (vy < -0.1f)
+                {
+                    airState = AirState.Falling;
+                    anim.SetTrigger("Falling");
+                }
+                break;
+
+            case AirState.Falling:
+                if (grounded)
+                {
+                    EnterGroundedState();
+                }
+                break;
+        }
     }
     
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -281,4 +283,5 @@ public class PlayerMovementController : MonoBehaviour
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
+    #endregion
 }
