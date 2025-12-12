@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ public class NpcDialogueSystem : MonoBehaviour
     [Header("UI / Bubble")]
     public TextBubbleSystem textBubble; // 사용중인 텍스트 버블 컴포넌트
     private TMP_Text context;            // textBubble.context 를 미리 연결해도 됨
-    private TMPAnimator tmpAnimator;
 
     [Header("State")]
     public string speakerName;      // 이 NPC의 speaker 이름 (CSV의 speaker 컬럼)
     public bool wantTalk = false;   // 상호작용을 원하는지
     public bool inTalking = false;  // 현재 대화중인지
+    public bool isTyping = false; // 현재 타이핑 중인지
+    
+    public bool skiped = false;
     public bool playerLeave = false; // 플레이어가 대화 도중 자리 이탈
     
     [Header("Data")]
@@ -28,7 +31,6 @@ public class NpcDialogueSystem : MonoBehaviour
     {
         StartCoroutine(TalkPossibleDisplay());
         context = textBubble.context;
-        tmpAnimator = textBubble.tmpAnimator;
         BuildMapFromDatabase();
     }
 
@@ -85,8 +87,7 @@ public class NpcDialogueSystem : MonoBehaviour
             }
 
             // 실제 텍스트 세팅 (Localization이 있다면 LocalizationManager로 바꿔 호출)
-            //context.text = current.text;
-            tmpAnimator.SetText("<!show></!><!delay=0.075>"+current.text);
+            yield return StartCoroutine(TypeText(current.text));
             
             //AudioManager.Play(current.voiceKey);
             //Animator.SetTrigger(current.emotion);
@@ -128,6 +129,47 @@ public class NpcDialogueSystem : MonoBehaviour
         EndDialogue(current);
     }
     
+    private IEnumerator TypeText(string fullText, float speed = 0.075f)
+    {
+        isTyping = true;
+        context.text = "";
+
+        int i = 0;
+
+        while (i < fullText.Length)
+        {
+            // 스킵 입력 감지
+            if (skiped)
+            {
+                skiped = false;
+                context.text = fullText; // 즉시 전체 출력
+                isTyping = false;
+                yield break;
+            }
+
+            // TMP 태그 감지
+            if (fullText[i] == '<')
+            {
+                int tagEnd = fullText.IndexOf('>', i);
+                if (tagEnd != -1)
+                {
+                    string tag = fullText.Substring(i, tagEnd - i + 1);
+                    context.text += tag;
+                    i = tagEnd + 1;
+                    continue;
+                }
+            }
+
+            // 일반 문자 타이핑
+            context.text += fullText[i];
+            i++;
+
+            yield return new WaitForSeconds(speed);
+        }
+
+        isTyping = false;
+    }
+    
     private IEnumerator TalkPossibleDisplay()
     {
         if(!wantTalk) yield break;
@@ -161,8 +203,7 @@ public class NpcDialogueSystem : MonoBehaviour
             runningCoroutine = null;
         }
     }
-
-
+    
     #region ----HELPER----
     private DialogueAsset FindStartAssetForSpeaker(string speaker)
     {
@@ -222,4 +263,20 @@ public class NpcDialogueSystem : MonoBehaviour
         return null;
     }
     #endregion
+    
+    public void SwitchStayText(bool canInteract)
+    {
+        if (canInteract)
+        {
+            context.text = "";
+            textBubble.PlayShowAnimation();
+            context.text = "!";
+        }
+        else
+        {
+            context.text = "";
+            textBubble.PlayShowAnimation();
+            context.text = "...";
+        }
+    }
 }

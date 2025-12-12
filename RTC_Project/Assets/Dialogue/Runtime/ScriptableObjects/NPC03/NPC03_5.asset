@@ -15,7 +15,9 @@ MonoBehaviour:
   speaker: NPC03
   id: 5
   condition: nomal
-  text: "\uADF8\uB7EC\uB2C8 \uB108\uB294 \uC608\uC758 \uC788\uAC8C \uD589\uB3D9\uD574"
-  duration: 3
-  nextId: 
+  text: "\uB300\uD654 \uD558\uB294 \uB3C4\uC911\uC5D0<br>\uC0C1\uD638\uC791\uC6A9
+    \uD0A4\uB97C \uD55C\uBC88 \uB354 \uB204\uB974\uBA74<br>\uB9D0\uC744 \uB118\uAE38
+    \uC218 \uC788\uB2E4\uACE0 \uD558\uB354\uB77C\uACE0"
+  duration: 2
+  nextId: 6
   note: 

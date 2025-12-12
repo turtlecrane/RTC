@@ -245,7 +245,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2721423107978601166}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf9594e2a3b8eb4eaf3cc57f263076f, type: 3}
   m_Name: 
@@ -550,7 +550,6 @@ MonoBehaviour:
   bubbleSr: {fileID: 624760093578244002}
   taleSr: {fileID: 2195891084484564493}
   context: {fileID: 5261146902055727347}
-  tmpAnimator: {fileID: 0}
   padding: {x: 0.3, y: 0.3}
   minSize: {x: 0.45, y: 0.45}
   npc: {fileID: 0}

@@ -203,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &17000558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +220,8 @@ MonoBehaviour:
   speakerName: NPC01
   wantTalk: 0
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 9e4e76355b1c1d3408fc3c328a8506dd, type: 2}
 --- !u!65 &17000559
@@ -273,8 +275,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17000557}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.86, y: 2.03, z: -89.21}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.478588, y: 15.284223, z: 17.803047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -284,7 +286,7 @@ Transform:
   - {fileID: 1697296002}
   - {fileID: 1711600459}
   - {fileID: 1764986124}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1301346729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &19365589
 PrefabInstance:
@@ -296,11 +298,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6328666851028386617, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: npc
@@ -389,7 +391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &28955839
 Transform:
   m_ObjectHideFlags: 0
@@ -778,7 +780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474031402810017795, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.39
+      value: 47.037
       objectReference: {fileID: 0}
     - target: {fileID: 3474031402810017795, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: m_LocalPosition.y
@@ -786,7 +788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474031402810017795, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 48.26
+      value: 46.148
       objectReference: {fileID: 0}
     - target: {fileID: 3474031402810017795, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: m_LocalRotation.w
@@ -818,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5304038318391478017, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 5304038318391478017, guid: 9b509e993e9a9274d96ab92e20f5fe25, type: 3}
       propertyPath: acceleration
@@ -1116,7 +1118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &83606917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,6 +1135,8 @@ MonoBehaviour:
   speakerName: NPC01
   wantTalk: 1
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 9e4e76355b1c1d3408fc3c328a8506dd, type: 2}
 --- !u!65 &83606918
@@ -1186,8 +1190,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83606916}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.67, y: 2.03, z: -89.21}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.668589, y: 15.284223, z: 17.803047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1197,7 +1201,7 @@ Transform:
   - {fileID: 1082318737}
   - {fileID: 1737689990}
   - {fileID: 745141582}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1301346729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &85397428
 GameObject:
@@ -2605,7 +2609,7 @@ Transform:
   m_GameObject: {fileID: 316408837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.024188856, z: 0, w: -0.99970746}
-  m_LocalPosition: {x: 51.68018, y: 0.588, z: 42.26702}
+  m_LocalPosition: {x: 47.32718, y: 0.588, z: 40.15502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2921,7 +2925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &350490150
 Transform:
   m_ObjectHideFlags: 0
@@ -2930,14 +2934,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350490149}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -44.33859, y: 13.254223, z: 107.01305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 348139381}
   - {fileID: 6830710121395111800}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1301346729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356246913
 GameObject:
@@ -4910,6 +4914,8 @@ MonoBehaviour:
   speakerName: NPC03
   wantTalk: 1
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 7dacfcbf960e6c54bbdc0d5fd22df949, type: 2}
 --- !u!65 &727604033
@@ -5028,11 +5034,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6328666851028386617, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: npc
@@ -5085,10 +5091,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2721423107978601166, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
 --- !u!114 &745141581 stripped
 MonoBehaviour:
@@ -5397,6 +5400,8 @@ MonoBehaviour:
   speakerName: NPC02
   wantTalk: 0
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 9e4e76355b1c1d3408fc3c328a8506dd, type: 2}
 --- !u!65 &801497269
@@ -5523,7 +5528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &807493199
 Transform:
   m_ObjectHideFlags: 0
@@ -6141,8 +6146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880939672}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.9999685, z: -0, w: -0.007941151}
-  m_LocalPosition: {x: 23.83929, y: 3.698, z: -79.458755}
+  m_LocalRotation: {x: 0, y: 0.024188856, z: -0, w: -0.99970746}
+  m_LocalPosition: {x: 47.32718, y: 0.588, z: 40.15502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6230,7 +6235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &883667015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6247,6 +6252,8 @@ MonoBehaviour:
   speakerName: NPC01
   wantTalk: 1
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 9e4e76355b1c1d3408fc3c328a8506dd, type: 2}
 --- !u!65 &883667016
@@ -6300,8 +6307,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883667014}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.93, y: 2.03, z: -89.21}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.408588, y: 15.284223, z: 17.803047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6311,7 +6318,7 @@ Transform:
   - {fileID: 1245512527}
   - {fileID: 67301031}
   - {fileID: 1620090621}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1301346729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884710711
 GameObject:
@@ -6581,6 +6588,8 @@ MonoBehaviour:
   speakerName: NPC04
   wantTalk: 1
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: a78f4827785642b458b73a8bcba21e0d, type: 2}
 --- !u!65 &929047862
@@ -7953,6 +7962,41 @@ Transform:
   - {fileID: 1737134664}
   m_Father: {fileID: 807249845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1301346728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1301346729}
+  m_Layer: 0
+  m_Name: TestOBJ
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1301346729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301346728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 44.33859, y: -13.254223, z: -107.01305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 83606920}
+  - {fileID: 17000561}
+  - {fileID: 883667018}
+  - {fileID: 350490150}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1316429741
 GameObject:
   m_ObjectHideFlags: 0
@@ -9109,11 +9153,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6328666851028386617, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: npc
@@ -9261,11 +9305,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6328666851028386617, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: npc
@@ -9318,10 +9362,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2721423107978601166, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
 --- !u!114 &1620090620 stripped
 MonoBehaviour:
@@ -12215,11 +12256,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2133433565483695983, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6328666851028386617, guid: ed3ab9ee7c3be1148a6c7b1d06f7f0ce, type: 3}
       propertyPath: npc
@@ -12683,10 +12724,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   cinemachineCameraTarget: {fileID: 6259201708100211019}
-  topClamp: 70
-  bottomClamp: -30
-  cameraAngleOverride: 0
-  lockCameraPosition: 0
 --- !u!1 &2840164527767064394
 GameObject:
   m_ObjectHideFlags: 0
@@ -13595,6 +13632,8 @@ MonoBehaviour:
   speakerName: NPC01
   wantTalk: 1
   inTalking: 0
+  isTyping: 0
+  skiped: 0
   playerLeave: 0
   database: {fileID: 11400000, guid: 9e4e76355b1c1d3408fc3c328a8506dd, type: 2}
 --- !u!4 &5342020217022044004
@@ -15160,7 +15199,4 @@ SceneRoots:
   - {fileID: 8354416668599502667}
   - {fileID: 807493199}
   - {fileID: 28955839}
-  - {fileID: 83606920}
-  - {fileID: 17000561}
-  - {fileID: 883667018}
-  - {fileID: 350490150}
+  - {fileID: 1301346729}

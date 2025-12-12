@@ -31,6 +31,7 @@ public class PlayerInteractSystem : MonoBehaviour
             Debug.Log("상호작용 버튼이 눌림");
             npcScript.Talking();
             anim.SetTrigger("Talk");
+            if (npcScript.isTyping) npcScript.skiped = true; //타이핑 스킵
         }
     }
 
@@ -41,27 +42,30 @@ public class PlayerInteractSystem : MonoBehaviour
             if (other.GetComponent<NpcDialogueSystem>() != null)
             {
                 npcScript = other.GetComponent<NpcDialogueSystem>();
-                if (npcScript.wantTalk)
-                {
-                    canInteract = true;
-                }
-                else
-                {
-                    canInteract = false;
-                }
+                canInteract = npcScript.wantTalk ? true : false;
+                if (npcScript.wantTalk && !npcScript.inTalking)
+                    npcScript.SwitchStayText(canInteract);
             }
         }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("NPC"))
         {
             canInteract = false;
-            if (other.GetComponent<NpcDialogueSystem>() != null && npcScript.inTalking)
+            if (other.GetComponent<NpcDialogueSystem>() != null)
             {
-                npcScript.playerLeave = true;
-                //npcScript.StopTalking();
+                if (npcScript.inTalking)
+                {
+                    npcScript.playerLeave = true;
+                    npcScript = null;
+                    //npcScript.StopTalking();
+                }
+                else
+                {
+                    npcScript.SwitchStayText(canInteract);
+                }
             }
         }
     }

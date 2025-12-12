@@ -15,7 +15,7 @@ MonoBehaviour:
   speaker: NPC03
   id: 1
   condition: nomal
-  text: "\uB0B4\uAC00 \uD55C\uAC00\uC9C0 \uD301 \uC54C\uB824\uC904\uAE4C?"
-  duration: 1
+  text: "\uB0B4\uAC00 \uD55C\uAC00\uC9C0<br><wave>\uD301---!</><br>\uC54C\uB824\uC904\uAE4C?"
+  duration: 2
   nextId: 2
   note: 

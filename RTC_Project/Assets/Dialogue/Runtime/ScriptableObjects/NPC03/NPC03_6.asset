@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker: NPC03
   id: 6
-  condition: leave
-  text: "\uD558\uC544, \uADF8\uB798."
-  duration: 5
-  nextId: 
-  note: talkend
+  condition: nomal
+  text: "\uADF8\uB098\uC800\uB098...<br>\uC0C1\uD638\uC791\uC6A9 \uD0A4\uB77C\uB294\uAC8C
+    \uBB50\uC9C0?"
+  duration: 2
+  nextId: 7
+  note: 

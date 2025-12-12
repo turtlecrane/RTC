@@ -11,8 +11,8 @@ public class TextBubbleSystem : MonoBehaviour
     public SpriteRenderer bubbleSr;        // Sliced SpriteRenderer (size 사용)
     public SpriteRenderer taleSr; 
     public TMP_Text context;         // TextMeshPro 텍스트 (RectTransform)
-    [HideInInspector]public TMPAnimator tmpAnimator;
-    private TMPWriter tmpWriter;
+    //[HideInInspector]public TMPAnimator tmpAnimator;
+    //private TMPWriter tmpWriter;
 
     [Header("Resize")]
     public Vector2 padding = new Vector2(0.35f, 0.35f); 
@@ -58,8 +58,8 @@ public class TextBubbleSystem : MonoBehaviour
         bubbleColor = bubbleSr.color;
         taleColor = taleSr.color;
         textColor = context.color;
-        tmpAnimator = context.GetComponent<TMPAnimator>();
-        tmpWriter = context.GetComponent<TMPWriter>();
+        //tmpAnimator = context.GetComponent<TMPAnimator>();
+        //tmpWriter = context.GetComponent<TMPWriter>();
         cam = Camera.main;
     }
 
@@ -88,9 +88,9 @@ public class TextBubbleSystem : MonoBehaviour
         PlayHideAnimation(() =>
         {
             // 애니메이션 끝나면 완전 비활성화
-            tmpAnimator.enabled = false;
+            //tmpAnimator.enabled = false;
             isHiding = false;
-            tmpWriter.ResetWriter();
+            //tmpWriter.ResetWriter();
             gameObject.SetActive(false);
         });
     }
@@ -174,10 +174,10 @@ public class TextBubbleSystem : MonoBehaviour
     
     
     //[Aniamtion]--------------------------------------
-    private void PlayShowAnimation()
+    public void PlayShowAnimation()
     {
-        tmpAnimator.enabled = true;
-        tmpWriter.StartWriter();
+        //tmpAnimator.enabled = true;
+        //tmpWriter.StartWriter();
         
         KillAllTweens();
         isHiding = false;

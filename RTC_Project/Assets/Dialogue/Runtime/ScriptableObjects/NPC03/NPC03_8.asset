@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91760d6e64fbe5f40abb8ea0653a3730, type: 3}
-  m_Name: NPC03_3
+  m_Name: NPC03_8
   m_EditorClassIdentifier: 
   speaker: NPC03
-  id: 3
-  condition: nomal
-  text: "\uB9D0\uD558\uB294 \uC0AC\uB78C\uC774 <sketchy>\uD654\uAC00\uB098\uC11C</>"
+  id: 8
+  condition: leave
+  text: "<fade>\uD558\uC544, \uADF8\uB798.</>"
   duration: 2
-  nextId: 4
-  note: 
+  nextId: 
+  note: talkend

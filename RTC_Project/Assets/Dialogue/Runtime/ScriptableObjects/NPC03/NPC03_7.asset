@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91760d6e64fbe5f40abb8ea0653a3730, type: 3}
-  m_Name: NPC03_3
+  m_Name: NPC03_7
   m_EditorClassIdentifier: 
   speaker: NPC03
-  id: 3
+  id: 7
   condition: nomal
-  text: "\uB9D0\uD558\uB294 \uC0AC\uB78C\uC774 <sketchy>\uD654\uAC00\uB098\uC11C</>"
+  text: "\uC544\uBB34\uD2BC, \uADF8\uB7EC\uB2C8\uAE4C \uB108\uB294<br>\uC608\uC758
+    \uC788\uAC8C \uD589\uB3D9\uD558\uB294\uAC8C \uC88B\uC744\uAC70\uC57C."
   duration: 2
-  nextId: 4
+  nextId: 
   note: 
